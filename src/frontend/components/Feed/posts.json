@@ -1,0 +1,20 @@
+[
+    {
+        "userName": "ian",
+        "image": "https://thecuriouscollection.com/wp-content/uploads/2018/08/top-instagram-spots-south-island-new-zealand-15.jpg",
+        "likesNumber": 65,
+        "caption": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English."
+    },
+    {
+        "userName": "alex",
+        "image": "https://thecuriouscollection.com/wp-content/uploads/2018/08/top-instagram-spots-south-island-new-zealand-15.jpg",
+        "likesNumber": 25,
+        "caption": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English."
+    },
+    {
+        "userName": "chris",
+        "image": "https://thecuriouscollection.com/wp-content/uploads/2018/08/top-instagram-spots-south-island-new-zealand-15.jpg",
+        "likesNumber": 86,
+        "caption": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English."
+    }
+]

@@ -1,0 +1,14 @@
+.PostView {
+    text-align: left;
+    width: 100%;
+    background-color: white;
+    margin-top: 5px;
+}
+
+.PostView div {
+    padding: 7px 10px;
+}
+
+.PostView .image {
+    width: 100%;
+}
