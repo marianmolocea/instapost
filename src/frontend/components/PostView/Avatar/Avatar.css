@@ -1,0 +1,15 @@
+.Avatar {
+    position: relative;
+    width: 12px;
+    height: 15px;
+    border-radius: 100%;
+}
+
+.Avatar .first-letter {
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: 700;
+}

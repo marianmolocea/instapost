@@ -12,3 +12,12 @@
 .PostView .image {
     width: 100%;
 }
+
+.PostView .post-header {
+    display: flex;
+    align-items: center;
+}
+
+.PostView .post-header .element {
+    text-transform: capitalize;
+}

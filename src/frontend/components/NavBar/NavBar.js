@@ -3,13 +3,13 @@ import { Link } from "react-router-dom"
 import { AiOutlineHome, AiOutlineHeart, AiOutlineCompass, AiOutlinePlusCircle } from 'react-icons/ai' 
 import { FiSend, FiUser } from 'react-icons/fi' 
 
-import './NavBar.scss'
+import './NavBar.css'
 
 const NavBar = () => {
     return (
         <div className="NavBar bottom-box-shadow">
-            <div className="logo">Instapost</div>
             <Link to="/post"><AiOutlinePlusCircle /></Link>
+            <div className="logo">Instapost</div>
             <div className="icons-container">
                 <AiOutlineHome />
                 <AiOutlineCompass />

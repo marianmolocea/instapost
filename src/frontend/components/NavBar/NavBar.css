@@ -1,0 +1,16 @@
+.NavBar {
+    background-color: #fff;
+    height: 34px;
+    position: static;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.NavBar .icons-container {
+    width: 130px;
+    display: flex;
+    justify-content: space-between;
+}
+
