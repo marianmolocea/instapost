@@ -11,7 +11,7 @@ const NavBar = () => {
             <Link to="/post"><AiOutlinePlusCircle /></Link>
             <div className="logo">Instapost</div>
             <div className="icons-container">
-                <AiOutlineHome />
+                <Link to="/"><AiOutlineHome /></Link>
                 <AiOutlineCompass />
                 <AiOutlineHeart />
                 <FiSend />
