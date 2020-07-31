@@ -6,7 +6,7 @@ const Feed = () => {
     return (
         <div className="Feed">
             {
-                data.map(item => <PostView userName={item.userName} image={item.image} likeNumber={item.likesNumber} caption={item.caption} />)
+                data.map(item => <PostView key={item.id} userName={item.userName} image={item.image} likeNumber={item.likesNumber} caption={item.caption} />)
             }
         </div>
     )

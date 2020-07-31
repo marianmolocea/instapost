@@ -7,7 +7,7 @@ import { FiSend } from 'react-icons/fi'
 
 const PostView = ({userName, image, likeNumber, caption}) => {
 
-    const iconSize = "25px";
+    const iconSize = "20px";
 
     return (
         <div className="PostView bottom-box-shadow">
