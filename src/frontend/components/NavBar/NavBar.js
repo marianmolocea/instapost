@@ -12,7 +12,7 @@ const NavBar = () => {
     return (
         <div className="NavBar bottom-box-shadow">
             <Link to="/post"><AiOutlinePlusCircle size={iconSize}/></Link>
-            <div className="logo">Instapost</div>
+            <div className="logo">InstaPost</div>
             <div className="icons-container">
                 <Link to="/"><AiOutlineHome size={iconSize}/></Link>
                 <AiOutlineCompass size={iconSize}/>

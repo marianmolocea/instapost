@@ -1,21 +1,25 @@
 import React from 'react'
 import './PostView.css'
-import Avatar from './Avatar/Avatar'
+import Avatar from '@material-ui/core/Avatar'
 import { AiOutlineHeart } from 'react-icons/ai'
 import { RiChat3Line } from 'react-icons/ri'
 import { FiSend } from 'react-icons/fi'
 
-const PostView = ({userName, image, likeNumber, caption}) => {
+const PostView = ({username, imageUrl, likeNumber, caption}) => {
 
     const iconSize = "20px";
 
     return (
         <div className="PostView bottom-box-shadow">
             <div className="post-header">
-                <Avatar userName={userName}/>
-                <div className="element">{userName}</div> 
+                <Avatar 
+                    className="avatar" 
+                    alt={username.toUpperCase()} 
+                    src="/broken-image.jpg"
+                />
+                <div className="user-name">{username}</div> 
             </div>
-            <img src={image} alt="text" className="image" />
+            <img src={imageUrl} alt="text" className="image" />
             <div className="actions">
                 <AiOutlineHeart size={iconSize} />
                 <RiChat3Line size={iconSize}/>

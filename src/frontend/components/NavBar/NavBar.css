@@ -8,6 +8,10 @@
     padding: 10px;
 }
 
+.NavBar .logo{
+    font-weight: bold;
+}
+
 .NavBar .icons-container {
     width: 130px;
     display: flex;
