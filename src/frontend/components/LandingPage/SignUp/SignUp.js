@@ -10,28 +10,25 @@ const SignUp = () => {
     const [password, setPassword] = useState('')
     const [user, setUser] = useState(null)
 
-    const signUp = (event) => {
-        event.preventDefault();
-        auth
-            .createUserWithEmailAndPassword(email, password)
-            .then((authUser) => {
-                return authUser.user.updateProfile({
-                    displayName: username
-                })
-            })
-            .catch((err) => alert(err.message))
+    const signUp = async (e) => {
+        e.preventDefault();
+        try {
+            let authUser = await auth.createUserWithEmailAndPassword(email, password)
+            return authUser.user.updateProfile({displayName: username})     
+        } catch(err) {
+            alert(err.message)
+        } 
     }
+
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((authUser) => {
             if (authUser) {
                 // user has logged in
-                console.log(authUser);
                 setUser(authUser);
+                sessionStorage.setItem('login', true)
 
-                if (authUser.displayName) {
-                    // don't update username
-                } else {
+                if (!authUser.displayName) {
                     // if we just created someone
                     return authUser.updateProfile({
                         displayName: username
@@ -40,6 +37,7 @@ const SignUp = () => {
             } else {
                 // user has logged out
                 setUser(null)
+                sessionStorage.setItem('login', false)
             }
         })
 

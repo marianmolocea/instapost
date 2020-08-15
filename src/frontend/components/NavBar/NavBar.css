@@ -1,6 +1,7 @@
 .NavBar {
     background-color: #fff;
-    height: 34px;
+    height: 50px;
+    width: 600px;
     position: static;
     display: flex;
     justify-content: space-between;
