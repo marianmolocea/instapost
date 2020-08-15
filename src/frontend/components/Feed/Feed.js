@@ -9,14 +9,14 @@ const Feed = () => {
 
     useEffect(()=> {
         db.collection('posts').onSnapshot(snapshot => {
-            setPosts(snapshot.docs.map(doc => doc.data()))
+            setPosts(snapshot.docs.map(doc => ({id: doc.id, post: doc.data()})))
         });
     }, [])
 
     return (
         <div className="Feed">
             {
-                posts.map(item => <PostView key={item.id} username={item.username} imageUrl={item.imageUrl} likeNumber={item.likesNumber} caption={item.caption} />)
+                posts.map(({id, post}) => <PostView key={id} username={post.username} imageUrl={post.imageUrl} likeNumber={post.likesNumber} caption={post.caption} />)
             }
         </div>
     )
