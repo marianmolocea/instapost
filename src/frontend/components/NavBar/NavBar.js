@@ -18,7 +18,7 @@ const NavBar = () => {
                 <AiOutlineCompass size={iconSize}/>
                 <AiOutlineHeart size={iconSize}/>
                 <FiSend size={iconSize}/>
-                <FiUser size={iconSize}/>
+                <Link to="/profile"><FiUser size={iconSize}/></Link>
             </div>
         </div>
     )

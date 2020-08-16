@@ -8,9 +8,12 @@ const Feed = () => {
     const [posts, setPosts] = useState([])
 
     useEffect(()=> {
-        db.collection('posts').onSnapshot(snapshot => {
+        const unsubscribe = db.collection('posts').onSnapshot(snapshot => {
             setPosts(snapshot.docs.map(doc => ({id: doc.id, post: doc.data()})))
         });
+        return () => {
+            unsubscribe();
+        }
     }, [])
 
     return (

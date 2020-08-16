@@ -1,21 +1,11 @@
-import React, {useState} from 'react'
+import React, { useContext} from 'react'
 import TextField from '@material-ui/core/TextField';
 import {Button} from '@material-ui/core';
-import { auth } from '../../../../firebase';
+import { contextProvider } from '../../../context'
 
 const Login = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
 
-    const signIn = async (e) => {
-        e.preventDefault();
-
-        try {
-            await auth.signInWithEmailAndPassword(email, password) 
-        } catch (err) {
-            alert(err.message)
-        }
-    }
+    const {email, password, setPassword, setEmail, signIn} = useContext(contextProvider);
 
     return (
         <div className="auth-form">

@@ -18,6 +18,7 @@ body {
   background-color: $base-color;
   font-family: $font-family;
   min-height: 100vh;
+  max-width: 100vw;
   font-size: $default-font-size;
 }
 
@@ -26,6 +27,8 @@ body {
   text-align: center;
   max-width: $max-width;
   background-color: #fafafa;
+  min-height: 100vh;
+  position: relative;
 }
 
 .bottom-box-shadow {
@@ -48,4 +51,10 @@ textarea {
 
 textarea:focus {
   outline: none;
+}
+
+.spinner {
+  position: absolute;
+  top: calc(50% - 45px);
+  left: calc(50% - 45px)
 }

@@ -1,0 +1,27 @@
+.Profile {
+    width: 100%;
+    background-color: #fff;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 10px;
+}
+
+.profile__header {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.profile__information {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 10px;
+    gap: 20px;
+    align-content: center;
+}
+
+.profile__logout {
+    width: 100px;
+    margin: 10px;
+}

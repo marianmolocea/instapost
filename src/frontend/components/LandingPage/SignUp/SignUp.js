@@ -1,51 +1,12 @@
-import React, {useState, useEffect} from 'react'
-import { auth } from '../../../../firebase';
+import React, {useContext} from 'react'
 import TextField from '@material-ui/core/TextField';
 import {Button} from '@material-ui/core';
+import { contextProvider } from '../../../context'
 
 const SignUp = () => {
 
-    const [email, setEmail] = useState('')
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const [user, setUser] = useState(null)
+    const {username, setUsername, email, setEmail, password, setPassword, signUp, user, auth} = useContext(contextProvider);
 
-    const signUp = async (e) => {
-        e.preventDefault();
-        try {
-            let authUser = await auth.createUserWithEmailAndPassword(email, password)
-            return authUser.user.updateProfile({displayName: username})     
-        } catch(err) {
-            alert(err.message)
-        } 
-    }
-
-
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((authUser) => {
-            if (authUser) {
-                // user has logged in
-                setUser(authUser);
-                sessionStorage.setItem('login', true)
-
-                if (!authUser.displayName) {
-                    // if we just created someone
-                    return authUser.updateProfile({
-                        displayName: username
-                    })
-                }
-            } else {
-                // user has logged out
-                setUser(null)
-                sessionStorage.setItem('login', false)
-            }
-        })
-
-        return () => {
-            // perform some cleanup actions
-            unsubscribe();
-        }
-    }, [user, username]);
     return (
         <div className="auth-form">
             <h3>Are you new here?</h3>
