@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import data from './posts.json'
+import React, { useEffect, useState, useContext } from 'react'
 import PostView from '../PostView/PostView'
 import { db } from '../../../firebase';
+import { contextProvider } from '../../context';
 
 const Feed = () => {
 
     const [posts, setPosts] = useState([])
+    const {user} = useContext(contextProvider)
 
     useEffect(()=> {
         const unsubscribe = db.collection('posts').onSnapshot(snapshot => {
@@ -19,7 +20,7 @@ const Feed = () => {
     return (
         <div className="Feed">
             {
-                posts.map(({id, post}) => <PostView key={id} username={post.username} imageUrl={post.imageUrl} likeNumber={post.likesNumber} caption={post.caption} />)
+                posts.map(({id, post}) => <PostView key={id} postId={id} user={user} username={post.username} imageUrl={post.imageUrl} likeNumber={post.likesNumber} caption={post.caption} />)
             }
         </div>
     )
