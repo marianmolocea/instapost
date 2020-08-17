@@ -7,6 +7,8 @@ const Context = ({children}) => {
 
     const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')
+    const [loginEmail, setLoginEmail] = useState('')
+    const [loginPassword, setLoginPassword] = useState('')
     const [password, setPassword] = useState('')
     const [user, setUser] = useState(null)
     const [session, setSession] = useState(false)
@@ -26,8 +28,7 @@ const Context = ({children}) => {
         e.preventDefault();
 
         try {
-            let response = await auth.signInWithEmailAndPassword(email, password) 
-            console.log(response)
+            await auth.signInWithEmailAndPassword(loginEmail, loginPassword) 
         } catch (err) {
             alert(err.message)
         }
@@ -69,6 +70,8 @@ const Context = ({children}) => {
                     email, 
                     username, 
                     password,
+                    loginEmail,
+                    loginPassword,
                     user,
                     auth,
                     session,
@@ -76,6 +79,8 @@ const Context = ({children}) => {
                     setEmail,
                     setPassword,
                     setUsername,
+                    setLoginPassword,
+                    setLoginEmail,
                     signUp,
                     signIn,
                     isLoading

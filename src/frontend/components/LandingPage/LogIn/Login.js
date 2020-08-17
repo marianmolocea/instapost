@@ -5,7 +5,7 @@ import { contextProvider } from '../../../context'
 
 const Login = () => {
 
-    const {email, password, setPassword, setEmail, signIn} = useContext(contextProvider);
+    const {loginEmail, loginPassword, setLoginPassword, setLoginEmail, signIn} = useContext(contextProvider);
 
     return (
         <div className="auth-form">
@@ -14,15 +14,15 @@ const Login = () => {
                 className="auth__input" 
                 label="Email"
                 type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={loginEmail}
+                onChange={(e) => setLoginEmail(e.target.value)}
             />
             <TextField 
                 className="auth__input" 
                 label="Password" 
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={loginPassword}
+                onChange={(e) => setLoginPassword(e.target.value)}
             />
             <Button variant="outlined" color="primary" onClick={signIn}>login</Button>
         </div>
