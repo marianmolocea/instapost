@@ -4,20 +4,18 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
-    width: 600px;    
-}
-
-.AddPost .drag-drop {
-    height: 200px;
-    border: 1px solid #ddd;
-    width: 100%;
-    padding: 10px;
+    width: 600px;
+    height: 100%;  
 }
 
 .AddPost .caption {
-    max-width: 600px;
     width: 100%;
     border: 1px solid #ddd;
     margin: 10px 0;
     padding: 5px 10px;
+}
+
+.AddPost progress {
+    width: 300px;
+    margin-bottom: 15px;
 }

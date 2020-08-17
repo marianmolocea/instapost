@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useDropzone} from 'react-dropzone'
 import './PostPreview.css'
 
-const PostPreview = () => {
+const PostPreview = ({uploadImage, completed}) => {
 
   const [files, setFiles] = useState([]);
   const { getRootProps, getInputProps } = useDropzone({
@@ -15,9 +15,11 @@ const PostPreview = () => {
           })
         )
       );
+      
     },
+    multiple: false,
   });
-
+  
   const thumbs = files.map((file) => (
     <div className="thumb" key={file.name}>
       <div className="thumbInner">
@@ -25,6 +27,10 @@ const PostPreview = () => {
       </div>
     </div>
   ));
+
+  useEffect(() => {
+    uploadImage(files[0]);
+  }, [files, uploadImage])
 
   useEffect(
     () => () => {
@@ -34,11 +40,15 @@ const PostPreview = () => {
     [files]
   );
 
+  useEffect(() => {
+    completed && setFiles([])
+  }, [completed, setFiles])
+
   return (
     <section className="PostPreview">
-      <div {...getRootProps({ className: 'PostPreview' })}>
+      <div {...getRootProps({ className: 'previews' })}>
         <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
+        <p>Drag 'n' drop images here, or click to select images</p>
       </div>
       <aside className="thumbsContainer">{thumbs}</aside>
     </section>

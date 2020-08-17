@@ -11,7 +11,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 function App() {
   const { session, isLoading } = useContext(contextProvider);
-  console.log(session, isLoading);
 
   return (
     <Router>

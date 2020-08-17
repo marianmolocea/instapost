@@ -4,6 +4,7 @@ import { AiOutlineHome, AiOutlineHeart, AiOutlineCompass, AiOutlinePlusCircle } 
 import { FiSend, FiUser } from 'react-icons/fi' 
 
 import './NavBar.css'
+import { Button } from '@material-ui/core'
 
 const NavBar = () => {
 
@@ -11,8 +12,14 @@ const NavBar = () => {
 
     return (
         <div className="NavBar bottom-box-shadow">
-            <Link to="/post"><AiOutlinePlusCircle size={iconSize}/></Link>
-            <div className="logo">InstaPost</div>
+            <Link to="/post">
+                <Button variant="outlined">
+                    <AiOutlinePlusCircle size={iconSize}/>&nbsp; Add Post
+                </Button>
+            </Link>
+            <div className="logo">
+                InstaPost
+            </div>
             <div className="icons-container">
                 <Link to="/"><AiOutlineHome size={iconSize}/></Link>
                 <AiOutlineCompass size={iconSize}/>

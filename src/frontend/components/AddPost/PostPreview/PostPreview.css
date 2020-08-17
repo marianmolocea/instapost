@@ -1,5 +1,21 @@
 .PostPreview {
     height: 100%;
+    border: 1px solid #ddd;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.previews {
+    min-height: 200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.previews:focus {
+    outline: transparent;
 }
 
 .thumbsContainer {
@@ -7,17 +23,20 @@
     flex-direction: row;
     flex-wrap: wrap;
     margin-top: 16px;
+    height: 100%;
 }
 
+
 .thumb {
-    display: inline-flex;
+    display: flex;
+    justify-content: center;
     border-radius: 2px;
     border: 1px solid #eaeaea;
     margin-bottom: 8px;
     margin-right: 8px;
     width: 100px;
     height: 100px;
-    padding: 4px;
+    padding: 2px;
     box-sizing: 'border-box'
 }
 
@@ -28,7 +47,8 @@
 }
 
 .img {
-    display: block;
-    width: auto;
+    object-fit: contain;
+    display: flex;
     height: 100%;
+    align-items: center;
 }

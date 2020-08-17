@@ -1,44 +1,75 @@
-import React, { useState } from 'react'
-import './AddPost.css'
-import Dropzone from 'react-dropzone'
+import React, { useState, useContext } from 'react';
+import './AddPost.css';
 import PostPreview from './PostPreview/PostPreview';
-
+import { Button } from '@material-ui/core';
+import {storage, db} from '../../../firebase';
+import firebase from "firebase";
+import {contextProvider} from '../../context'
 
 
 const AddPost = () => {
     const [image, setImage] = useState(null);
+    const [caption, setCaption] = useState('');
+    const [progress, setProgress] = useState(0);
+    const [completeUpload, setCompleteUpload] = useState(false);
 
-    const handleOnDrop = (acceptedFiles, rejectedFiles) => {
-        
-        if(acceptedFiles && acceptedFiles.length > 0) {
-            const currentFile = acceptedFiles[0];
-            const myFileReader = new FileReader();
-            myFileReader.addEventListener('load', () => {
-                setImage(myFileReader.result)
-            });
-           myFileReader.readAsDataURL(currentFile);
-        } else {
-            console.log('Nothing happened', rejectedFiles, acceptedFiles)
+    const {user} = useContext(contextProvider);
+
+    const handleImageUpload = (imageData) => {
+        setImage(imageData)
+    }
+
+    const uploadHandler = async () => {
+        try {
+        const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    
+        uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+                // progress function
+                const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                setProgress(progress);
+            
+            },
+            (err) => {
+                // Error function
+                console.log(err);
+            },
+            () => {
+                // complete function 
+                storage
+                    .ref('images')
+                    .child(image.name)
+                    .getDownloadURL()
+                    .then((url) => {
+                        db.collection('posts').add({
+                            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                            caption: caption,
+                            imageUrl: url,
+                            username: user.displayName
+                        });
+                        setProgress(0);
+                        setCaption('');
+                        setImage(null);
+                        setCompleteUpload(true);
+                    })
+            }
+        );
+        setCompleteUpload(false)
+        } catch (err) {
+            console.log(err)
         }
     }
 
     return (
         <div className="AddPost bottom-box-shadow">
-            <div className="drag-drop">
-{/*                 <Dropzone onDrop={handleOnDrop} accept='image/*' style={{height: '100%'}}>
-                    {({getRootProps, getInputProps}) => (
-                        <section>
-                        <div {...getRootProps()} >
-                            <input {...getInputProps()} />
-                            <p >Drag 'n' drop some files here, or click to select files</p>
-                        </div>
-                        </section>
-                    )}
-                </Dropzone> */}
-                <PostPreview />
-            </div>
-            <textarea className="caption" placeholder="Caption Here" />
-            <button className="add-post">Post</button>
+            <PostPreview uploadImage={handleImageUpload} completed={completeUpload}/>
+            <textarea className="caption" placeholder="Caption Here" value={caption} onChange={e => setCaption(e.target.value)}/>
+            { progress === 0 ? "" : <progress value={progress} max="100" /> }
+            <Button 
+                variant="outlined"
+                onClick={uploadHandler}
+            >Post</Button>
         </div>
     )
 }
