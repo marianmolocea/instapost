@@ -67,6 +67,7 @@ const AddPost = () => {
             <textarea className="caption" placeholder="Caption Here" value={caption} onChange={e => setCaption(e.target.value)}/>
             { progress === 0 ? "" : <progress value={progress} max="100" /> }
             <Button 
+                disabled={completeUpload}
                 variant="outlined"
                 onClick={uploadHandler}
             >Post</Button>

@@ -61,3 +61,44 @@
     cursor: pointer;
 }
 
+.PostView .like__button {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.PostView .like__button:focus {
+    outline: none
+}
+
+.PostView .image-container {
+    position: relative;
+}
+
+.PostView .overlay-heart {
+    display: none;
+}
+
+.PostView .overlay-heart.active {
+    display: inline;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    animation-name: heartPulsation;
+    animation-duration: 1000ms;
+}
+
+@keyframes heartPulsation{
+    0% {
+        opacity: 0;
+    }
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}

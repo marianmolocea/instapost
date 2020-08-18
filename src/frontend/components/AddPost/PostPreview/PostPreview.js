@@ -23,7 +23,7 @@ const PostPreview = ({uploadImage, completed}) => {
   const thumbs = files.map((file) => (
     <div className="thumb" key={file.name}>
       <div className="thumbInner">
-        <img src={file.preview} className="img" />
+        <img src={file.preview} alt={file.name} className="img" />
       </div>
     </div>
   ));
