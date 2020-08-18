@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import firebase from 'firebase';
 import { db } from '../../../firebase'
 import Comment from './Comment/Comment'
@@ -7,14 +7,54 @@ import {Avatar, Button} from '@material-ui/core'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { RiChat3Line } from 'react-icons/ri'
 import { FiSend } from 'react-icons/fi'
+import { contextProvider } from '../../context';
 
-const PostView = ({postId, user, username, imageUrl, likeNumber, caption}) => {
+const PostView = ({postId, user, username, imageUrl, caption}) => {
 
     const [comments, setComments] = useState([]);
     const [likes, setLikes] = useState(0);
     const [comment, setComment] = useState('');
     const [isLiked, setIsLiked] = useState(false);
-    const [activeHeart, setActiveHeart] = useState('')
+    const [activeHeart, setActiveHeart] = useState('');
+
+
+    const postComment = (e) => {
+        e.preventDefault();
+
+        db.collection("posts").doc(postId).collection("comments").add({
+            text: comment,
+            username: user.displayName,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        setComment('');
+    }
+
+    const likePost = (e) => {
+        e.preventDefault();
+
+        db.collection('posts').doc(postId).collection('likes').doc(user.displayName).set({
+            like: true
+        })
+        setIsLiked(true);
+    }
+
+    const unlikePost = (e) => {
+        e.preventDefault(e)
+
+        db.collection('posts').doc(postId).collection('likes').doc(user.displayName).delete()
+        setIsLiked(false);
+    }
+
+    const triggerHeartEffect = (e) => {
+        if (!isLiked) {
+            likePost(e);
+        } 
+        setActiveHeart('active');
+        setTimeout(() => setActiveHeart(''), 1001)
+    }
+
+    const iconSize = "22px";
 
     useEffect(() => {
         db
@@ -54,51 +94,13 @@ const PostView = ({postId, user, username, imageUrl, likeNumber, caption}) => {
         };
     }, [postId, user.displayName])
 
-    const postComment = (e) => {
-        e.preventDefault();
-
-        db.collection("posts").doc(postId).collection("comments").add({
-            text: comment,
-            username: user.displayName,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-
-        setComment('');
-    }
-
-    const likePost = (e) => {
-        e.preventDefault();
-
-        db.collection('posts').doc(postId).collection('likes').doc(user.displayName).set({
-            like: true
-        })
-        setIsLiked(true);
-    }
-
-    const unlikePost = (e) => {
-        e.preventDefault(e)
-
-        db.collection('posts').doc(postId).collection('likes').doc(user.displayName).delete()
-        setIsLiked(false);
-    }
-
-    const triggerHeartEffect = (e) => {
-        if (!isLiked) {
-            likePost(e);
-        } 
-        setActiveHeart('active');
-        setTimeout(() => setActiveHeart(''), 1001)
-    }
-
-    const iconSize = "20px";
-
     return (
         <div className="PostView bottom-box-shadow">
             <div className="post-header">
                 <Avatar 
                     className="avatar" 
                     alt={username.toUpperCase()} 
-                    src="/broken-image.jpg"
+                    src={username.photoURL}
                 />
                 <div className="user-name">{username}</div> 
             </div>
@@ -123,10 +125,9 @@ const PostView = ({postId, user, username, imageUrl, likeNumber, caption}) => {
             <div className="caption">
                 <strong>{username}&nbsp;</strong>{caption}
             </div>
-            <Comment comments={comments}/>
+            <Comment comments={comments} profilePicture={user.photoURL}/>
             <div className="add-comment-container">
                 <input 
-                    id="add-comment"
                     className="add-comment" 
                     placeholder="Add a comment..."
                     value={comment}

@@ -21,7 +21,7 @@
 }
 
 .PostView .actions  {
-    width: 100px;
+    width: 120px;
     display: flex;
     justify-content: space-between;
     padding: 10px;
@@ -94,7 +94,11 @@
     0% {
         opacity: 0;
     }
-    70% {
+    45% {
+        opacity: 1;
+    }
+
+    66% {
         opacity: 1;
     }
 

@@ -13,6 +13,7 @@ const Context = ({children}) => {
     const [user, setUser] = useState(null)
     const [session, setSession] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
+    const [profilePicture, setProfilePicture] = useState('')
 
     const signUp = async (e) => {
         e.preventDefault();
@@ -41,6 +42,7 @@ const Context = ({children}) => {
                 setUser(authUser);
                 setSession(true)
                 setIsLoading(false);
+                setProfilePicture(authUser.photoURL)
                 
                 if (!authUser.displayName) {
                     // if we just created someone
@@ -55,7 +57,6 @@ const Context = ({children}) => {
                 setIsLoading(false);
             }
         })
-
 
         return () => {
             // perform some cleanup actions
@@ -75,6 +76,8 @@ const Context = ({children}) => {
                     user,
                     auth,
                     session,
+                    profilePicture,
+                    setProfilePicture,
                     setSession,
                     setEmail,
                     setPassword,

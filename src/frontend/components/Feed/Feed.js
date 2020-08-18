@@ -20,7 +20,7 @@ const Feed = () => {
     return (
         <div className="Feed">
             {
-                posts.map(({id, post}) => <PostView key={id} postId={id} user={user} username={post.username} imageUrl={post.imageUrl} likeNumber={post.likesNumber} caption={post.caption} />)
+                posts.map(({id, post}) => <PostView key={id} postId={id} user={user} username={post.username} imageUrl={post.imageUrl} caption={post.caption} />)
             }
         </div>
     )

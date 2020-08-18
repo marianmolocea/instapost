@@ -8,7 +8,7 @@ import { Button } from '@material-ui/core'
 
 const NavBar = () => {
 
-    const iconSize = "20px";
+    const iconSize = "22px";
 
     return (
         <div className="NavBar bottom-box-shadow">

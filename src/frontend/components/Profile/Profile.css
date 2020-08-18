@@ -13,6 +13,41 @@
     width: 100%;
 }
 
+.Profile .avatar__container {
+    position: relative;
+}
+
+.Profile .add-avatar-image {
+    position: absolute;
+    background-color: transparent;
+    bottom: 0;
+    right: 0;
+    padding: 0;
+}
+
+.avatar-upload__label {
+    overflow: hidden;
+    height: 34px;
+    width: 34px;
+}
+
+.avatar-upload__label input[type=file] {
+    opacity: 0;
+    width: 32px;
+    height: 32px;
+}
+
+.plus__btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 50px;
+    stroke: #fff
+}
+
 .profile__information {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -24,4 +59,14 @@
 .profile__logout {
     width: 100px;
     margin: 10px;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.buttons-container Button {
+    margin-right: 10px;
 }
