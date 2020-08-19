@@ -32,6 +32,7 @@ const Profile = () => {
       },
       (err) => {
           // Error function
+          console.log(progress)
           console.log(err);
       },
       () => {

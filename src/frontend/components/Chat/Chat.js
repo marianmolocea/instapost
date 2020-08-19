@@ -1,5 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
-import { contextProvider } from '../../context'
+import React, {useState, useEffect} from 'react';
 import './Chat.css'
 import { Avatar } from '@material-ui/core';
 import { Link, useParams } from 'react-router-dom';

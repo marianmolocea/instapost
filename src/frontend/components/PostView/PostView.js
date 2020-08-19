@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import firebase from 'firebase';
 import { db } from '../../../firebase'
 import Comment from './Comment/Comment'
@@ -7,7 +7,6 @@ import {Avatar, Button} from '@material-ui/core'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { RiChat3Line } from 'react-icons/ri'
 import { FiSend } from 'react-icons/fi'
-import { contextProvider } from '../../context';
 import { Link } from 'react-router-dom';
 
 const PostView = ({postId, user, username, imageUrl, caption, profilePhoto}) => {
