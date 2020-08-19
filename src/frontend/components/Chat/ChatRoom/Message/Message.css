@@ -1,0 +1,15 @@
+.Message {
+    display: flex;
+    padding: 8px 15px;
+    background-color: #eeeeee;
+    border-radius: 20px 20px 20px 5px;
+    width: fit-content;
+    max-width: 75%;
+    margin-bottom: 10px;
+}
+
+.Message.receiver {
+    margin-left: auto;
+    background-color: lightskyblue;
+    border-radius: 20px 20px 5px 20px;
+}

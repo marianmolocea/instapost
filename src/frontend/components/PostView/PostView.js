@@ -8,6 +8,7 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { RiChat3Line } from 'react-icons/ri'
 import { FiSend } from 'react-icons/fi'
 import { contextProvider } from '../../context';
+import { Link } from 'react-router-dom';
 
 const PostView = ({postId, user, username, imageUrl, caption, profilePhoto}) => {
 
@@ -105,7 +106,7 @@ const PostView = ({postId, user, username, imageUrl, caption, profilePhoto}) => 
                     alt={username.toUpperCase()} 
                     src={profilePhoto}
                 />
-                <div className="user-name">{username}</div> 
+                <Link to={`profile/${username}`} className="user-name">{username}</Link> 
             </div>
             <div className="image-container">
                 <AiFillHeart className={`overlay-heart ${activeHeart}`} fill="#fff" size="80px" />

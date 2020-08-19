@@ -9,8 +9,8 @@ import {AiFillPlusCircle } from 'react-icons/ai'
 
 const useStyles = makeStyles((theme) => ({
   large: {
-    width: theme.spacing(16),
-    height: theme.spacing(16),
+    width: theme.spacing(14),
+    height: theme.spacing(14),
   },
 }));
 
@@ -93,7 +93,6 @@ const Profile = () => {
           </div>
           <div className="buttons-container">
             <Button variant="contained" color="primary">follow</Button>
-            <Button variant="contained" color="primary">message</Button>
             <Button onClick={() => auth.signOut()} variant="outlined" color="secondary" className="profile__logout">Logout</Button>
           </div>
         </div>
