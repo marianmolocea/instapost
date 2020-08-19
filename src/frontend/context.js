@@ -24,7 +24,11 @@ const Context = ({children}) => {
                 db.collection('users').doc(username).set({
                     username: username,
                 })
+                setEmail('')
+                setPassword('')
+                setUsername('')
                 return authUser.user.updateProfile({displayName: username});
+                
             } else if (usernameExists) { 
                 alert('This username is already taken. Please choose another username!')
             }else {
@@ -32,7 +36,7 @@ const Context = ({children}) => {
             }
         } catch(err) {
             alert(err.message)
-        } 
+        }
     }
 
     const signIn = async (e) => {
@@ -40,9 +44,13 @@ const Context = ({children}) => {
 
         try {
             await auth.signInWithEmailAndPassword(loginEmail, loginPassword) 
+            
+            setEmail('')
+            setPassword('')
         } catch (err) {
             alert(err.message)
         }
+
     }
 
     useEffect(() => {

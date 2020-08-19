@@ -27,7 +27,7 @@ const NavBar = () => {
                 <Link to="/"><AiOutlineHome size={iconSize}/></Link>
                 <AiOutlineCompass size={iconSize}/>
                 <AiOutlineHeart size={iconSize}/>
-                <Link to={`/profile/${user.displayName}/chat`}><FiSend size={iconSize}/></Link>
+                <Link to={`/profile/${user?.displayName}/chat`}><FiSend size={iconSize}/></Link>
                 <Link to="/profile"><FiUser size={iconSize}/></Link>
             </div>
         </div>

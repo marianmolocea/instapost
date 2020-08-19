@@ -61,13 +61,15 @@ const PostView = ({postId, user, username, imageUrl, caption, profilePhoto}) => 
     const iconSize = "22px";
 
     useEffect(() => {
-        db
-            .collection('posts')
-            .doc(postId)
-            .collection('likes')
-            .doc(user.displayName)
-            .get()
-            .then(doc => setIsLiked(doc.data()?.like));
+        if(postId) {
+            db
+                .collection('posts')
+                .doc(postId)
+                .collection('likes')
+                .doc(user.displayName)
+                .get()
+                .then(doc => setIsLiked(doc.data()?.like));
+        }
     }, [postId, user.displayName])
 
     useEffect(() => {

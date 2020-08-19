@@ -1,10 +1,10 @@
 import React from 'react';
 import './Message.css'
 
-const Message = ({message, i}) => {
+const Message = ({msg, sender}) => {
     return (
-        <div className={`Message ${i % 2 && "receiver"}`}>
-            {message}
+        <div className={`Message ${sender && "receiver"}`}>
+            {msg}
         </div>
     )
 }

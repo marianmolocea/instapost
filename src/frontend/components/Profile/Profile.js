@@ -65,7 +65,7 @@ const Profile = () => {
     <>
     {
       !session ? 
-        <Redirect to="/" />
+        <Redirect exact to="/" />
         :
         <div className="Profile bottom-box-shadow">
           <div className="profile__header">

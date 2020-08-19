@@ -1,24 +1,26 @@
 .ChatRoom {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px 10px 0 10px;
     background-color: white;
     margin-top: 10px;
-    height: 80vh;
-    overflow-y: scroll;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    padding: 10px;
 }
 
-.ChatRoom::-webkit-scrollbar {
+.messages-container::-webkit-scrollbar {
     width: 0;
     background: transparent;
 }
 
-.ChatRoom .messages-container {
+.messages-container {
     width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 15px;
+    padding-bottom: 60px;
+    height: 80vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .ChatRoom > form {

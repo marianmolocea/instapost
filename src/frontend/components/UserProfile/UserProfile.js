@@ -49,7 +49,7 @@ const UserProfile = () => {
             </div>
             <div className="buttons-container">
             <Button variant="contained" color="primary">follow</Button>
-            <Link to={`/profile/${user.displayName}/chat/${username}`} ><Button variant="contained" color="primary">message</Button></Link>
+            <Link to={`/profile/${user?.displayName}/chat/${username}`} ><Button variant="contained" color="primary">message</Button></Link>
             </div>
         </div>
 
