@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './AddPost.css';
 import PostPreview from './PostPreview/PostPreview';
 import { Button } from '@material-ui/core';
@@ -13,7 +13,7 @@ const AddPost = () => {
     const [progress, setProgress] = useState(0);
     const [completeUpload, setCompleteUpload] = useState(false);
 
-    const {user} = useContext(contextProvider);
+    const {user, setProfilePicture, profilePicture} = useContext(contextProvider);
 
     const handleImageUpload = (imageData) => {
         setImage(imageData)
@@ -28,8 +28,7 @@ const AddPost = () => {
             (snapshot) => {
                 // progress function
                 const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-                setProgress(progress);
-            
+                setProgress(progress);            
             },
             (err) => {
                 // Error function
@@ -37,6 +36,7 @@ const AddPost = () => {
             },
             () => {
                 // complete function 
+
                 storage
                     .ref('images')
                     .child(image.name)
@@ -46,7 +46,8 @@ const AddPost = () => {
                             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                             caption: caption,
                             imageUrl: url,
-                            username: user.displayName
+                            username: user.displayName,
+                            profilePhoto: profilePicture
                         });
                         setProgress(0);
                         setCaption('');
@@ -60,6 +61,12 @@ const AddPost = () => {
             console.log(err)
         }
     }
+    
+    useEffect(() => {
+        if(user){
+        db.collection('users').doc(user.displayName).get().then(doc => setProfilePicture(doc.data().profilePhoto))
+        }
+    }, [user, setProfilePicture])
 
     return (
         <div className="AddPost bottom-box-shadow">

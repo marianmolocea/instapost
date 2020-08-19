@@ -2,7 +2,7 @@ import React from 'react'
 import './Comment.css';
 import {Avatar} from '@material-ui/core'
 
-const Comment = ({comments, profilePicture}) => {
+const Comment = ({comments}) => {
     return (
         <>
         {
@@ -11,7 +11,7 @@ const Comment = ({comments, profilePicture}) => {
                     <Avatar 
                         className="avatar" 
                         alt={comment.username.toUpperCase()} 
-                        src={profilePicture}
+                        src={comment.profilePhoto}
                     />
                     <div className="user-name">{comment.username}:&nbsp;</div>
                     <div className="comment">{comment.text}</div>

@@ -1,5 +1,5 @@
-import React, {useContext, useState} from 'react';
-import { auth, storage } from '../../../firebase'
+import React, {useContext, useState, useEffect} from 'react';
+import { auth, storage, db } from '../../../firebase'
 import { Redirect } from 'react-router-dom';
 import {contextProvider} from '../../context';
 import './Profile.css';
@@ -41,9 +41,9 @@ const Profile = () => {
               .child(image.name)
               .getDownloadURL()
               .then((url) => {
-                user.updateProfile({
-                  photoURL: url
-                });
+                db.collection('users').doc(user.displayName).update({
+                  profilePhoto: url
+                })
                 setProfilePicture(url)
               })
       })
@@ -54,6 +54,12 @@ const Profile = () => {
       handleUpload(e.target.files[0]);
     }
   }
+
+  useEffect(() => {
+    if(user){
+      db.collection('users').doc(user.displayName).get().then(doc => setProfilePicture(doc.data().profilePhoto))
+    }
+  })
   
   return (
     <>

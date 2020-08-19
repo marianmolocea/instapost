@@ -15,6 +15,7 @@ const SignUp = () => {
                 label="Username" 
                 type="text"
                 value={username}
+                required
                 onChange={(e) => setUsername(e.target.value)}    
             />
             <TextField 
@@ -22,6 +23,7 @@ const SignUp = () => {
                 label="Email"
                 type="text"
                 value={email}
+                required
                 onChange={(e) => setEmail(e.target.value)}  
             />
             <TextField 
@@ -29,6 +31,7 @@ const SignUp = () => {
                 label="Password" 
                 type="password"
                 value={password}
+                required
                 onChange={(e) => setPassword(e.target.value)}
             />
             {

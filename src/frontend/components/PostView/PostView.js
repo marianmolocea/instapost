@@ -9,7 +9,7 @@ import { RiChat3Line } from 'react-icons/ri'
 import { FiSend } from 'react-icons/fi'
 import { contextProvider } from '../../context';
 
-const PostView = ({postId, user, username, imageUrl, caption}) => {
+const PostView = ({postId, user, username, imageUrl, caption, profilePhoto}) => {
 
     const [comments, setComments] = useState([]);
     const [likes, setLikes] = useState(0);
@@ -18,12 +18,15 @@ const PostView = ({postId, user, username, imageUrl, caption}) => {
     const [activeHeart, setActiveHeart] = useState('');
 
 
-    const postComment = (e) => {
+    const postComment = async (e) => {
         e.preventDefault();
+
+        let profilePhoto = await db.collection('users').doc(user.displayName).get().then(doc => doc.data().profilePhoto)
 
         db.collection("posts").doc(postId).collection("comments").add({
             text: comment,
             username: user.displayName,
+            profilePhoto: profilePhoto,
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
 
@@ -100,7 +103,7 @@ const PostView = ({postId, user, username, imageUrl, caption}) => {
                 <Avatar 
                     className="avatar" 
                     alt={username.toUpperCase()} 
-                    src={username.photoURL}
+                    src={profilePhoto}
                 />
                 <div className="user-name">{username}</div> 
             </div>
@@ -125,7 +128,7 @@ const PostView = ({postId, user, username, imageUrl, caption}) => {
             <div className="caption">
                 <strong>{username}&nbsp;</strong>{caption}
             </div>
-            <Comment comments={comments} profilePicture={user.photoURL}/>
+            <Comment comments={comments}/>
             <div className="add-comment-container">
                 <input 
                     className="add-comment" 

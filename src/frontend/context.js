@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 
 export const contextProvider = createContext();
 
@@ -18,8 +18,18 @@ const Context = ({children}) => {
     const signUp = async (e) => {
         e.preventDefault();
         try {
-            let authUser = await auth.createUserWithEmailAndPassword(email, password)
-            return authUser.user.updateProfile({displayName: username})     
+            let usernameExists = await db.collection('users').doc(username).get().then(doc => doc.exists);
+            if(username && !usernameExists) {
+                let authUser = await auth.createUserWithEmailAndPassword(email, password);
+                db.collection('users').doc(username).set({
+                    username: username,
+                })
+                return authUser.user.updateProfile({displayName: username});
+            } else if (usernameExists) { 
+                alert('This username is already taken. Please choose another username!')
+            }else {
+                alert('You must enter an username')
+            }
         } catch(err) {
             alert(err.message)
         } 
@@ -42,14 +52,7 @@ const Context = ({children}) => {
                 setUser(authUser);
                 setSession(true)
                 setIsLoading(false);
-                setProfilePicture(authUser.photoURL)
-                
-                if (!authUser.displayName) {
-                    // if we just created someone
-                    return authUser.updateProfile({
-                        displayName: username
-                    })
-                }
+                              
             } else {
                 // user has logged out
                 setUser(null)
@@ -63,6 +66,7 @@ const Context = ({children}) => {
             unsubscribe();
         }
     }, [user, username, session, isLoading]);
+    
 
     return (
         <contextProvider.Provider 
