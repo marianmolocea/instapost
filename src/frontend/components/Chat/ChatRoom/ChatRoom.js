@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import firebase from 'firebase'
 import {db} from '../../../../firebase';
-import { contextProvider } from '../../../context';
 import './ChatRoom.css';
 import Message from './Message/Message';
 import { useParams } from 'react-router-dom';

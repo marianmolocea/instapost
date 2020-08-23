@@ -1,5 +1,4 @@
 import React, {useContext, useState, useEffect} from 'react';
-import firebase from 'firebase';
 import { db } from '../../../firebase'
 import { useParams, Redirect, Link } from 'react-router-dom';
 import {contextProvider} from '../../context';
