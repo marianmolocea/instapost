@@ -24,7 +24,7 @@ const Chat = () => {
         conversations.map(conversation => (
             db.collection('users').doc(conversation.id).get().then(doc => setPeerPhoto([...peerPhoto, doc.data().profilePhoto]))
         ))
-    });
+    }, []);
     console.log(peerPhoto)
     
     return (
