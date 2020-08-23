@@ -21,16 +21,21 @@ const PostView = ({postId, user, username, imageUrl, caption, profilePhoto}) => 
     const postComment = async (e) => {
         e.preventDefault();
 
-        let profilePhoto = await db.collection('users').doc(user.displayName).get().then(doc => doc.data().profilePhoto)
-
-        db.collection("posts").doc(postId).collection("comments").add({
-            text: comment,
-            username: user.displayName,
-            profilePhoto: profilePhoto || "",
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-
-        setComment('');
+        try {
+            let response = await db.collection('users').doc(user.displayName).get();
+            let profilePhoto = await response.data().profilePhoto
+    
+            db.collection("posts").doc(postId).collection("comments").add({
+                text: comment,
+                username: user.displayName,
+                profilePhoto: profilePhoto || "",
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+    
+            setComment('');
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     const likePost = (e) => {
