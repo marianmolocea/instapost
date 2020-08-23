@@ -1,7 +1,9 @@
 .ChatRoom {
     background-color: white;
     margin-top: 10px;
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 85vh;
 }
 
 .messages-container::-webkit-scrollbar {
@@ -11,24 +13,20 @@
 
 .messages-container {
     width: 100%;
-    position: relative;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 0 15px;
-    padding-bottom: 15px;
-    height: 80vh;
+    padding: 10px 15px;
     overflow-y: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
 
-.messages-container > form {
+.ChatRoom form {
     width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
     background-color: white;
+    padding: 10px;
 }
 
 .ChatRoom > form > button {
@@ -40,4 +38,17 @@
     padding: 8px 15px;
     border: 1px solid #ccc;
     border-radius: 20px;
+}
+
+.chatRoom__header {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+}
+
+.chatRoom__header > h3 {
+    margin-left: 10px;
 }

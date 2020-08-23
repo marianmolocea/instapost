@@ -26,7 +26,7 @@ const PostView = ({postId, user, username, imageUrl, caption, profilePhoto}) => 
         db.collection("posts").doc(postId).collection("comments").add({
             text: comment,
             username: user.displayName,
-            profilePhoto: profilePhoto,
+            profilePhoto: profilePhoto || "",
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
 

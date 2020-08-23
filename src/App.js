@@ -24,7 +24,7 @@ function App() {
             <Route exact path="/" component={Feed} />
             <Route exact path="/post" component={AddPost} />
             <Route exact path="/profile" component={Profile} />
-            <Route exact path="/profile/:username" component={UserProfile} />
+            <Route exact path="/profile/:peer" component={UserProfile} />
             <Route exact path="/profile/:username/chat" component={Chat} />
             <Route exact path="/profile/:username/chat/:peer" component={ChatRoom} />
           </>

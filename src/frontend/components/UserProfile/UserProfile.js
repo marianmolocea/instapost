@@ -1,4 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react';
+import firebase from 'firebase';
 import { db } from '../../../firebase'
 import { useParams, Redirect, Link } from 'react-router-dom';
 import {contextProvider} from '../../context';
@@ -14,27 +15,47 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UserProfile = () => {
-  const [userProfilePhoto, setUserProfilePhoto] = useState('')
+  const [peerProfilePhoto, setPeerProfilePhoto] = useState('')
   const classes = useStyles();
   const { user} = useContext(contextProvider);
-  const {username} = useParams();
+  const {peer} = useParams();
+
+  const handleMessageClick = async () => {
+    await db
+      .collection('users')
+      .doc(user.displayName)
+      .collection('conversations')
+      .doc(peer)
+      .set({
+          profilePhoto: await db.collection('users').doc(peer).get().then(doc => doc.data().profilePhoto)
+      });
+
+    await db
+      .collection('users')
+      .doc(peer)
+      .collection('conversations')
+      .doc(user.displayName)
+      .set({
+          profilePhoto: await db.collection('users').doc(peer).get().then(doc => doc.data().profilePhoto)
+      })
+  }
   
   useEffect(() => {
-    if(username){
-      db.collection('users').doc(username).get().then(doc => setUserProfilePhoto(doc.data().profilePhoto))
+    if(peer){
+      db.collection('users').doc(peer).get().then(doc => setPeerProfilePhoto(doc.data().profilePhoto));
     }
-  }, [username])
+  }, [peer])
   
   return (
       <>
       {
-        username === user.displayName ?
+        peer === user.displayName ?
         <Redirect to="/profile" /> :
         <div className="UserProfile bottom-box-shadow">
             <div className="profile__header">
                 <div className="avatar__container">
-                    <Avatar className={classes.large} src={userProfilePhoto}/>
-                    <h3>{username}</h3>
+                    <Avatar className={classes.large} src={peerProfilePhoto}/>
+                    <h3>{peer}</h3>
                 </div>
                 <div className="information__display">
                   <div className="profile__information">
@@ -49,7 +70,7 @@ const UserProfile = () => {
             </div>
             <div className="buttons-container">
             <Button variant="contained" color="primary">follow</Button>
-            <Link to={`/profile/${user?.displayName}/chat/${username}`} ><Button variant="contained" color="primary">message</Button></Link>
+            <Link to={`/profile/${user?.displayName}/chat/${peer}`}><Button variant="contained" color="primary" onClick={() => handleMessageClick()}>message</Button></Link>
             </div>
         </div>
 

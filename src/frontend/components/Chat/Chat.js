@@ -6,6 +6,7 @@ import { db } from '../../../firebase';
 
 const Chat = () => {
     const [conversations, setConversations] = useState([]);
+    const [peerPhoto, setPeerPhoto] = useState([]);
     const { username } = useParams();
 
     useEffect(() => {
@@ -19,13 +20,20 @@ const Chat = () => {
         return () => unsubscribe();
     }, [username])
 
+    useEffect(() => {
+        conversations.map(conversation => (
+            db.collection('users').doc(conversation.id).get().then(doc => setPeerPhoto([...peerPhoto, doc.data().profilePhoto]))
+        ))
+    }, [conversations]);
+    console.log(peerPhoto)
+    
     return (
         <div className="Chat bottom-box-shadow">
             <h3>Messages</h3>
             {
-                conversations.map(conversation => ( 
+                conversations.map((conversation, i) => ( 
                     <Link to={`/profile/${username}/chat/${conversation.id}`} key={conversation.id} className="room-name__card bottom-box-shadow">
-                        <Avatar className="chat-avatar"/>
+                        <Avatar src={peerPhoto[i]} className="chat-avatar"/>
                         <div className="room-name">{conversation.id}</div>
                     </Link>
                 ))
